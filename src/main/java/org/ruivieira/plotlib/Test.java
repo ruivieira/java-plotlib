@@ -6,12 +6,12 @@ public class Test {
 
         Figure figure = new Figure();
 
-        int[] x = new int[]{1, 2, 3, 4};
-        int[] y = new int[]{7, 9, 5, 6};
+        Integer[] x = new Integer[]{1, 2, 3, 4};
+        Integer[] y = new Integer[]{7, 9, 5, 6};
 
-        figure.add(ScatterPlot.create(x, y));
+        figure.add(new ScatterPlot<>(x, y));
 
-        figure.save();
+//        figure.save();
 
     }
 }

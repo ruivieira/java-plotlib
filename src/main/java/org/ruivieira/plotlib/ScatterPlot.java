@@ -1,34 +1,53 @@
 package org.ruivieira.plotlib;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
-public class ScatterPlot implements Plot {
+public class ScatterPlot<T, U> implements Plot {
 
     List<String> xs = new ArrayList<>();
     List<String> ys = new ArrayList<>();
 
+    private Optional<String> marker = Optional.empty();
 
-    public ScatterPlot() {
 
+    public ScatterPlot(T[] x, U[] y) {
+        for (T _x : x) {
+            xs.add(String.valueOf(_x));
+        }
+        for (U _y : y) {
+            ys.add(String.valueOf(_y));
+        }
+    }
+
+    public ScatterPlot(Collection<T> x, Collection<U> y) {
+        for (T _x : x) {
+            xs.add(String.valueOf(_x));
+        }
+        for (U _y : y) {
+            ys.add(String.valueOf(_y));
+        }
+    }
+
+    public ScatterPlot setMarker(String marker) {
+        this.marker = Optional.of(marker);
+        return this;
     }
 
     public String render() {
-        return "plt.plot([" + String.join(",", xs) + "], [" + String.join(",", ys) + "])\n";
+        final StringBuilder rendered = new StringBuilder();
+        rendered.append("plt.scatter([").append(String.join(",", xs));
+        rendered.append("], [");
+        rendered.append(String.join(",", ys));
+        rendered.append("]");
+        marker.ifPresent(s -> rendered.append(", marker='").append(s).append("'"));
+
+        rendered.append(")\n");
+        System.out.println(rendered.toString());
+        return rendered.toString();
     }
 
-    public static ScatterPlot create(int[] x, int[] y) {
-        List<String> xs = new ArrayList<>();
-        for (int _x : x) {
-            xs.add(String.valueOf(_x));
-        }
-        List<String> ys = new ArrayList<>();
-        for (int _y : y) {
-            ys.add(String.valueOf(_y));
-        }
-        ScatterPlot plot = new ScatterPlot();
-        plot.xs = xs;
-        plot.ys = ys;
-        return plot;
-    }
 }
