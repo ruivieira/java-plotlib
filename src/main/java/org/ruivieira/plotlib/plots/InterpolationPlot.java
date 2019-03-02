@@ -1,4 +1,8 @@
-package org.ruivieira.plotlib;
+package org.ruivieira.plotlib.plots;
+
+import org.ruivieira.plotlib.AbstractPlot;
+import org.ruivieira.plotlib.Converter;
+import org.ruivieira.plotlib.Plot;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +33,9 @@ public class InterpolationPlot<T, U> extends AbstractPlot implements Plot {
 
 
         script.append(")\n");
+
+        renderYLim();
+
         System.out.println(script.toString());
         return script.toString();
     }
