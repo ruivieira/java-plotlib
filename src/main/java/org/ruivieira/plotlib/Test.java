@@ -9,7 +9,7 @@ public class Test {
         Integer[] x = new Integer[]{1, 2, 3, 4};
         Integer[] y = new Integer[]{7, 9, 5, 6};
 
-        figure.add(new ScatterPlot<>(x, y));
+//        figure.add(new ScatterPl/ot<>(x, y));
 
 //        figure.save();
 

@@ -1,35 +1,22 @@
 package org.ruivieira.plotlib;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class ScatterPlot<T, U> implements Plot {
+public class ScatterPlot<T, U> extends AbstractPlot implements Plot {
 
-    List<String> xs = new ArrayList<>();
-    List<String> ys = new ArrayList<>();
+    final List<String> xs;
+    final List<String> ys;
 
     private Optional<String> marker = Optional.empty();
+    private Optional<String> colour = Optional.empty();
 
-
-    public ScatterPlot(T[] x, U[] y) {
-        for (T _x : x) {
-            xs.add(String.valueOf(_x));
-        }
-        for (U _y : y) {
-            ys.add(String.valueOf(_y));
-        }
-    }
 
     public ScatterPlot(Collection<T> x, Collection<U> y) {
-        for (T _x : x) {
-            xs.add(String.valueOf(_x));
-        }
-        for (U _y : y) {
-            ys.add(String.valueOf(_y));
-        }
+        this.xs = new Converter<>(x).getConverted();
+        this.ys = new Converter<>(y).getConverted();
+
     }
 
     public ScatterPlot setMarker(String marker) {
@@ -37,17 +24,20 @@ public class ScatterPlot<T, U> implements Plot {
         return this;
     }
 
-    public String render() {
-        final StringBuilder rendered = new StringBuilder();
-        rendered.append("plt.scatter([").append(String.join(",", xs));
-        rendered.append("], [");
-        rendered.append(String.join(",", ys));
-        rendered.append("]");
-        marker.ifPresent(s -> rendered.append(", marker='").append(s).append("'"));
 
-        rendered.append(")\n");
-        System.out.println(rendered.toString());
-        return rendered.toString();
+    public String render() {
+        script.append("plt.scatter([").append(String.join(",", xs));
+        script.append("], [");
+        script.append(String.join(",", ys));
+        script.append("]");
+        marker.ifPresent(s -> script.append(", marker='").append(s).append("'"));
+
+        renderColour();
+        renderAlpha();
+
+        script.append(")\n");
+        System.out.println(script.toString());
+        return script.toString();
     }
 
 }
