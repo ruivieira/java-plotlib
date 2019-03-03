@@ -26,15 +26,18 @@ public class Figure {
     }
 
     public void save(String imageName) {
+        save(imageName, Runtime.getRuntime());
+    }
+
+    public void save(String imageName, Runtime runtime) {
         try {
             File tempFile = File.createTempFile("java-plotlib-", ".py");
-            System.out.println(tempFile.getAbsolutePath());
-            System.out.println(tempFile.getName());
             title.ifPresent(s -> script.append("plt.title('").append(s).append("')\n"));
             script.append("\n").append("plt.savefig('").append(imageName).append("')");
             writeStringToFile(tempFile, script.toString(), Charset.defaultCharset());
-            Process p = Runtime.getRuntime().exec("/usr/local/bin/python3 " + tempFile.getAbsolutePath());
-            System.out.println(p.getOutputStream().toString());
+//            System.out.println(script.toString());
+            runtime.exec("/usr/local/bin/python3 " + tempFile.getAbsolutePath());
+            System.out.println(tempFile.getAbsolutePath());
 
         } catch (IOException e) {
             e.printStackTrace();
