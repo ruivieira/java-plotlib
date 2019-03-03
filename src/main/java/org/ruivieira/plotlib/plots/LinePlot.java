@@ -1,32 +1,29 @@
 package org.ruivieira.plotlib.plots;
 
 import org.ruivieira.plotlib.AbstractPlot;
-import org.ruivieira.plotlib.Converter;
 import org.ruivieira.plotlib.Plot;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-public class ScatterPlot<T, U> extends AbstractPlot<T, U> implements Plot {
+public class LinePlot<T, U> extends AbstractPlot<T, U> implements Plot {
 
     private Optional<String> marker = Optional.empty();
-    private Optional<Double> markerSize = Optional.empty();
+    private Optional<String> linestyle = Optional.empty();
 
-    public ScatterPlot(Collection<T> x, Collection<U> y) {
+    public LinePlot(Collection x, Collection y) {
         super(x, y);
     }
 
-    public ScatterPlot setMarker(String marker) {
+    public LinePlot setMarker(String marker) {
         this.marker = Optional.of(marker);
         return this;
     }
 
-    public ScatterPlot setMarkerSize(double size) {
-        this.markerSize = Optional.of(size);
+    public LinePlot setLineStyle(String style) {
+        this.linestyle = Optional.of(style);
         return this;
     }
-
 
     @Override
     public String render() {
@@ -35,7 +32,7 @@ public class ScatterPlot<T, U> extends AbstractPlot<T, U> implements Plot {
         script.append(String.join(",", ys));
         script.append("]");
         marker.ifPresent(s -> script.append(", marker='").append(s).append("'"));
-        markerSize.ifPresent(s -> script.append(", s=").append(s));
+        linestyle.ifPresent(s -> script.append(", linestyle='").append(s).append("'"));
 
         renderColour();
         renderAlpha();
@@ -45,6 +42,6 @@ public class ScatterPlot<T, U> extends AbstractPlot<T, U> implements Plot {
         renderYLim();
 
         return script.toString();
-    }
 
+    }
 }

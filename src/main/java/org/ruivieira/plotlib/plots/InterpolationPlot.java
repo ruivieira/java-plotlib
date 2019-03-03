@@ -1,22 +1,25 @@
 package org.ruivieira.plotlib.plots;
 
 import org.ruivieira.plotlib.AbstractPlot;
-import org.ruivieira.plotlib.Converter;
 import org.ruivieira.plotlib.Plot;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
-public class InterpolationPlot<T, U> extends AbstractPlot implements Plot {
+public class InterpolationPlot<T, U> extends AbstractPlot<T, U> implements Plot {
 
-    List<String> xs;
-    List<String> ys;
     int steps;
 
+    private Optional<String> linestyle = Optional.empty();
+
     public InterpolationPlot(Collection<T> x, Collection<U> y, int steps) {
-        this.xs = new Converter<>(x).getConverted();
-        this.ys = new Converter<>(y).getConverted();
+        super(x, y);
         this.steps = steps;
+    }
+
+    public InterpolationPlot setLineStyle(String style) {
+        this.linestyle = Optional.of(style);
+        return this;
     }
 
     @Override
@@ -30,13 +33,12 @@ public class InterpolationPlot<T, U> extends AbstractPlot implements Plot {
 
         renderColour();
         renderAlpha();
-
+        linestyle.ifPresent(s -> script.append(", linestyle='").append(s).append("'"));
 
         script.append(")\n");
 
         renderYLim();
 
-        System.out.println(script.toString());
         return script.toString();
     }
 }
