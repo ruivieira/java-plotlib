@@ -39,9 +39,7 @@ public class Figure {
             title.ifPresent(s -> script.append("plt.title('").append(s).append("')\n"));
             script.append("\n").append("plt.savefig('").append(imageName).append("')");
             writeStringToFile(tempFile, script.toString(), Charset.defaultCharset());
-//            System.out.println(script.toString());
             runtime.exec(python + " " + tempFile.getAbsolutePath());
-            System.out.println(tempFile.getAbsolutePath());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +52,6 @@ public class Figure {
             File tempFile = File.createTempFile("java-plotlib-", ".png");
             save(tempFile.getAbsolutePath());
              img = ImageIO.read(new File(tempFile.getAbsolutePath()));
-
         } catch (IOException e) {
             e.printStackTrace();
         }
