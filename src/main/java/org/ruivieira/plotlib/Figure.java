@@ -11,6 +11,8 @@ import static org.apache.commons.io.FileUtils.writeStringToFile;
 
 public class Figure {
 
+    private String python = "/usr/local/bin/python3";
+
     private Optional<String> title = Optional.empty();
 
     public StringBuilder script = new StringBuilder();
@@ -38,7 +40,7 @@ public class Figure {
             script.append("\n").append("plt.savefig('").append(imageName).append("')");
             writeStringToFile(tempFile, script.toString(), Charset.defaultCharset());
 //            System.out.println(script.toString());
-            runtime.exec("/usr/local/bin/python3 " + tempFile.getAbsolutePath());
+            runtime.exec(python + " " + tempFile.getAbsolutePath());
             System.out.println(tempFile.getAbsolutePath());
 
         } catch (IOException e) {
@@ -57,5 +59,13 @@ public class Figure {
             e.printStackTrace();
         }
         return img;
+    }
+
+    public String getPython() {
+        return python;
+    }
+
+    public void setPython(String python) {
+        this.python = python;
     }
 }
