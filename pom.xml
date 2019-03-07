@@ -6,7 +6,8 @@
 
     <groupId>org.ruivieira</groupId>
     <artifactId>java-plotlib</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
+
     <build>
         <plugins>
             <plugin>
@@ -43,7 +44,6 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -81,7 +81,7 @@
         <repository>
             <id>bintray-ruivieira-maven</id>
             <name>ruivieira-maven</name>
-            <url>https://api.bintray.com/maven/ruivieira/maven/java-plotlib;publish=1</url>
+            <url>https://api.bintray.com/maven/ruivieira/maven/java-plotlib/;publish=1</url>
         </repository>
     </distributionManagement>
 
