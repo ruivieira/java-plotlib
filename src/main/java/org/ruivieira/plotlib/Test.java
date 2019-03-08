@@ -2,12 +2,14 @@ package org.ruivieira.plotlib;
 
 import org.ruivieira.plotlib.plots.ScatterPlot;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.util.Arrays;
 
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Figure figure = new Figure();
 
@@ -16,7 +18,11 @@ public class Test {
 
         figure.add(new ScatterPlot<>(Arrays.asList(x), Arrays.asList(y)));
 
-        figure.getBufferedImage();
+        System.out.println(figure.getBufferedImage());
 
-    }
+        String[] readers = ImageIO.getReaderFormatNames();
+        for (String reader : readers)
+            System.out.println("reader: " + reader);
+        }
+
 }

@@ -2,8 +2,7 @@ package org.ruivieira.plotlib;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Optional;
 
@@ -37,25 +36,25 @@ public class Figure {
         try {
             File tempFile = File.createTempFile("java-plotlib-", ".py");
             title.ifPresent(s -> script.append("plt.title('").append(s).append("')\n"));
-            script.append("\n").append("plt.savefig('").append(imageName).append("')");
+            script.append("\n").append("plt.savefig('").append(imageName).append("', format='png', transparent=False)");
             writeStringToFile(tempFile, script.toString(), Charset.defaultCharset());
-            runtime.exec(python + " " + tempFile.getAbsolutePath());
+            Process p = runtime.exec(python + " " + tempFile.getAbsolutePath());
+            p.waitFor();
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public BufferedImage getBufferedImage() {
-        BufferedImage img = null;
-        try {
-            File tempFile = File.createTempFile("java-plotlib-", ".png");
-            save(tempFile.getAbsolutePath());
-             img = ImageIO.read(new File(tempFile.getAbsolutePath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return img;
+    public BufferedImage getBufferedImage() throws IOException {
+        File tempFile = File.createTempFile("tmp", ".png");
+        save(tempFile.getAbsolutePath());
+        File savedImage = new File(tempFile.getAbsolutePath());
+        FileInputStream fis = new FileInputStream(savedImage);
+        System.out.println(savedImage);
+        return ImageIO.read(fis);
     }
 
     public String getPython() {

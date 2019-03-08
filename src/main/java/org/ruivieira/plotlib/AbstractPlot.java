@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public abstract class AbstractPlot<T, U> implements Plot {
 
-    protected final List<String> xs;
-    protected final List<String> ys;
+    protected final Converter<T> xs;
+    protected final Converter<U> ys;
 
 
     protected Optional<String> colour = Optional.empty();
@@ -17,8 +17,8 @@ public abstract class AbstractPlot<T, U> implements Plot {
     protected final StringBuilder script = new StringBuilder();
 
     public AbstractPlot(Collection<T> x, Collection<U> y) {
-        this.xs = new Converter<>(x).getConverted();
-        this.ys = new Converter<>(y).getConverted();
+        this.xs = new Converter<>(x);
+        this.ys = new Converter<>(y);
 
     }
 

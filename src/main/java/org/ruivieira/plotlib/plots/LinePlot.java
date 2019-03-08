@@ -1,6 +1,7 @@
 package org.ruivieira.plotlib.plots;
 
 import org.ruivieira.plotlib.AbstractPlot;
+import org.ruivieira.plotlib.Arguments;
 import org.ruivieira.plotlib.Plot;
 
 import java.util.Collection;
@@ -27,12 +28,13 @@ public class LinePlot<T, U> extends AbstractPlot<T, U> implements Plot {
 
     @Override
     public String render() {
-        script.append("plt.scatter([").append(String.join(",", xs));
-        script.append("], [");
-        script.append(String.join(",", ys));
-        script.append("]");
-        marker.ifPresent(s -> script.append(", marker='").append(s).append("'"));
-        linestyle.ifPresent(s -> script.append(", linestyle='").append(s).append("'"));
+        script.append("plt.plot(")
+                .append(xs.getConvertedList())
+                .append(",")
+                .append(ys.getConvertedList());
+
+        marker.ifPresent(s -> script.append(", ").append(Arguments.build("marker", s)));
+        linestyle.ifPresent(s -> script.append(", ").append(Arguments.build("linestyle", s)));
 
         renderColour();
         renderAlpha();

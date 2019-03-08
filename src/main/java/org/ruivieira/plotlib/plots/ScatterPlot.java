@@ -30,10 +30,10 @@ public class ScatterPlot<T, U> extends AbstractPlot<T, U> implements Plot {
 
     @Override
     public String render() {
-        script.append("plt.scatter([").append(String.join(",", xs));
-        script.append("], [");
-        script.append(String.join(",", ys));
-        script.append("]");
+        script.append("plt.scatter(").append(xs.getConvertedList())
+                .append(",")
+                .append(ys.getConvertedList());
+
         marker.ifPresent(s -> script.append(", marker='").append(s).append("'"));
         markerSize.ifPresent(s -> script.append(", s=").append(s));
 
