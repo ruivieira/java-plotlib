@@ -3,11 +3,14 @@ package org.ruivieira.plotlib.plots;
 import org.ruivieira.plotlib.AbstractPlot;
 import org.ruivieira.plotlib.Arguments;
 import org.ruivieira.plotlib.Plot;
+import org.ruivieira.plotlib.interfaces.Colour;
+import org.ruivieira.plotlib.interfaces.LineStyle;
+import org.ruivieira.plotlib.interfaces.Marker;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public class LinePlot<T, U> extends AbstractPlot<T, U> implements Plot {
+public class LinePlot<T, U> extends AbstractPlot<T, U> implements Plot, Marker<LinePlot>, LineStyle<LinePlot>, Colour<LinePlot> {
 
     private Optional<String> marker = Optional.empty();
     private Optional<String> linestyle = Optional.empty();
@@ -16,12 +19,12 @@ public class LinePlot<T, U> extends AbstractPlot<T, U> implements Plot {
         super(x, y);
     }
 
-    public LinePlot setMarker(String marker) {
+    public LinePlot<T, U> setMarker(String marker) {
         this.marker = Optional.of(marker);
         return this;
     }
 
-    public LinePlot setLineStyle(String style) {
+    public LinePlot<T, U> setLineStyle(String style) {
         this.linestyle = Optional.of(style);
         return this;
     }
@@ -44,6 +47,13 @@ public class LinePlot<T, U> extends AbstractPlot<T, U> implements Plot {
         renderYLim();
 
         return script.toString();
+
+    }
+
+    @Override
+    public LinePlot<T, U> setColour(String colour) {
+        this.colour = Optional.of(colour);
+        return this;
 
     }
 }
