@@ -7,6 +7,9 @@ RUN pip3 install --no-cache-dir notebook==5.5.* jupyterlab==0.32.* tornado==5.1.
 
 USER root
 
+RUN mkdir -p /usr/local/bin
+RUN ln -s /usr/bin/python3 /usr/local/bin/python3
+
 # Download the kernel release
 RUN curl -L https://github.com/SpencerPark/IJava/releases/download/v1.2.0/ijava-1.2.0.zip > ijava-kernel.zip
 
