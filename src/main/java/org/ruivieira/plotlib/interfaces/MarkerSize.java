@@ -1,4 +1,6 @@
 package org.ruivieira.plotlib.interfaces;
 
-public interface MarkerSize {
+public interface MarkerSize<A> {
+
+    public A setMarkerSize(double size);
 }

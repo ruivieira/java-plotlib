@@ -22,11 +22,6 @@ public abstract class AbstractPlot<T, U> implements Plot {
 
     }
 
-    public AbstractPlot setColour(String colour) {
-        this.colour = Optional.of(colour);
-        return this;
-    }
-
     public AbstractPlot setYLim(Coordinate c) {
         this.ylim = Optional.of(c);
         return this;

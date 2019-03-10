@@ -1,4 +1,6 @@
 package org.ruivieira.plotlib.interfaces;
 
-public class LineStyle {
+public interface LineStyle<A> {
+
+    public A setLineStyle(String style);
 }
