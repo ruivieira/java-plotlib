@@ -1,17 +1,15 @@
 package org.ruivieira.plotlib.plots;
 
-import org.ruivieira.plotlib.AbstractPlot;
-import org.ruivieira.plotlib.Converter;
+import org.ruivieira.plotlib.BinaryAbstractPlot;
 import org.ruivieira.plotlib.Plot;
 import org.ruivieira.plotlib.interfaces.Colour;
 import org.ruivieira.plotlib.interfaces.Marker;
 import org.ruivieira.plotlib.interfaces.MarkerSize;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-public class ScatterPlot<T, U> extends AbstractPlot<T, U> implements Plot, Colour<ScatterPlot>, Marker<ScatterPlot>, MarkerSize<ScatterPlot> {
+public class ScatterPlot<T, U> extends BinaryAbstractPlot<T, U> implements Plot, Colour<ScatterPlot>, Marker<ScatterPlot>, MarkerSize<ScatterPlot> {
 
     private Optional<String> marker = Optional.empty();
     private Optional<Double> markerSize = Optional.empty();

@@ -1,13 +1,13 @@
 package org.ruivieira.plotlib.plots;
 
-import org.ruivieira.plotlib.AbstractPlot;
+import org.ruivieira.plotlib.BinaryAbstractPlot;
 import org.ruivieira.plotlib.Arguments;
 import org.ruivieira.plotlib.Plot;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public class InterpolationPlot<T, U> extends AbstractPlot<T, U> implements Plot {
+public class InterpolationPlot<T, U> extends BinaryAbstractPlot<T, U> implements Plot {
 
     int steps;
 

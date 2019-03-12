@@ -1,28 +1,22 @@
 package org.ruivieira.plotlib;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractPlot<T, U> implements Plot {
+public abstract class BinaryAbstractPlot<T, U> extends UnaryAbstractPlot<T> implements Plot {
 
-    protected final Converter<T> xs;
     protected final Converter<U> ys;
-
 
     protected Optional<String> colour = Optional.empty();
     protected Optional<Double> alpha = Optional.empty();
     protected Optional<Coordinate> ylim = Optional.empty();
 
-    protected final StringBuilder script = new StringBuilder();
-
-    public AbstractPlot(Collection<T> x, Collection<U> y) {
-        this.xs = new Converter<>(x);
+    public BinaryAbstractPlot(Collection<T> x, Collection<U> y) {
+        super(x);
         this.ys = new Converter<>(y);
-
     }
 
-    public AbstractPlot setYLim(Coordinate c) {
+    public BinaryAbstractPlot setYLim(Coordinate c) {
         this.ylim = Optional.of(c);
         return this;
     }
@@ -35,7 +29,7 @@ public abstract class AbstractPlot<T, U> implements Plot {
         colour.ifPresent(s -> script.append(", color='").append(s).append("'"));
     }
 
-    public AbstractPlot setAlpha(Double alpha) {
+    public BinaryAbstractPlot setAlpha(Double alpha) {
         this.alpha = Optional.of(alpha);
         return this;
     }
