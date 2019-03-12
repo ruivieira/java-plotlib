@@ -1,10 +1,13 @@
 package org.ruivieira.plotlib;
 
+import org.pmw.tinylog.Logger;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Optional;
+
 
 import static org.apache.commons.io.FileUtils.writeStringToFile;
 
@@ -38,6 +41,8 @@ public class Figure {
             title.ifPresent(s -> script.append("plt.title('").append(s).append("')\n"));
             script.append("\n").append("plt.savefig('").append(imageName).append("', format='png', transparent=False)");
             writeStringToFile(tempFile, script.toString(), Charset.defaultCharset());
+            Logger.debug("Saving temporary script to {}", tempFile.getAbsolutePath());
+            Logger.debug("Saving temporary image to {}", imageName);
             Process p = runtime.exec(python + " " + tempFile.getAbsolutePath());
             p.waitFor();
 
@@ -53,7 +58,6 @@ public class Figure {
         save(tempFile.getAbsolutePath());
         File savedImage = new File(tempFile.getAbsolutePath());
         FileInputStream fis = new FileInputStream(savedImage);
-        System.out.println(savedImage);
         return ImageIO.read(fis);
     }
 
