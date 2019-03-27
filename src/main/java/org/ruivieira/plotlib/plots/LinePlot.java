@@ -54,6 +54,5 @@ public class LinePlot<T, U> extends BinaryAbstractPlot<T, U> implements Plot, Ma
     public LinePlot<T, U> setColour(String colour) {
         this.colour = Optional.of(colour);
         return this;
-
     }
 }
