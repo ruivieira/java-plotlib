@@ -4,6 +4,8 @@ import org.pmw.tinylog.Configurator;
 import org.pmw.tinylog.Level;
 import org.pmw.tinylog.writers.ConsoleWriter;
 import org.ruivieira.plotlib.plots.Histogram;
+import org.ruivieira.plotlib.plots.HorizontalLine;
+import org.ruivieira.plotlib.plots.ScatterPlot;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,12 +20,15 @@ public class Test {
                 .level(Level.DEBUG)
                 .activate();
 
+        Integer[] x = new Integer[1000];
+
+        for (int i=0 ; i < 1000 ; i++) {
+            x[i] = i;
+        }
+
         Figure figure = new Figure();
-
-        Double[] x = new Double[]{1.0, 2.0, 3.0, 4.0};
-
-        figure.add(new Histogram<>(Arrays.asList(x)).setBins(200));
-
-        System.out.println(figure.getBufferedImage());
+        figure.add(new ScatterPlot<>(Arrays.asList(x), Arrays.asList(x)));
+        figure.add(new HorizontalLine<>(10.0).setColour("black").setLineStyle("--"));
+        figure.save("/tmp/did.png");
     }
 }
