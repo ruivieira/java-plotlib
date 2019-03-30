@@ -3,6 +3,8 @@ package org.ruivieira.plotlib;
 import org.pmw.tinylog.Logger;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -67,5 +69,32 @@ public class Figure {
 
     public void setPython(String python) {
         this.python = python;
+    }
+
+    public void show()  {
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("tmp", ".png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        save(tempFile.getAbsolutePath());
+        ImageViewer frame = new ImageViewer(tempFile.getAbsolutePath());
+        frame.setSize(640, 480);
+        frame.setVisible(true);
+
+    }
+
+    private class ImageViewer extends JFrame
+    {
+        private ImageViewer(String arg){
+            JPanel panel = new JPanel();
+            panel.setSize(480,640);
+            ImageIcon icon = new ImageIcon(arg);
+            JLabel label = new JLabel();
+            label.setIcon(icon);
+            panel.add(label);
+            this.getContentPane().add(panel);
+        }
     }
 }
