@@ -1,11 +1,13 @@
 package org.ruivieira.plotlib;
 
+import org.ruivieira.plotlib.converters.ListConverter;
+
 import java.util.Collection;
 import java.util.Optional;
 
 public abstract class BinaryAbstractPlot<T, U> extends UnaryAbstractPlot<T> implements Plot {
 
-    protected final Converter<U> ys;
+    protected final ListConverter<U> ys;
 
     protected Optional<String> colour = Optional.empty();
     protected Optional<Double> alpha = Optional.empty();
@@ -13,7 +15,7 @@ public abstract class BinaryAbstractPlot<T, U> extends UnaryAbstractPlot<T> impl
 
     public BinaryAbstractPlot(Collection<T> x, Collection<U> y) {
         super(x);
-        this.ys = new Converter<>(y);
+        this.ys = new ListConverter<>(y);
     }
 
     public BinaryAbstractPlot setYLim(Coordinate c) {

@@ -22,7 +22,7 @@ public class Figure {
     public StringBuilder script = new StringBuilder();
 
     public Figure() {
-        script.append("import matplotlib\nimport matplotlib.pyplot as plt\n\n");
+        script.append("import matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n");
     }
 
     public void setTitle(String title) {

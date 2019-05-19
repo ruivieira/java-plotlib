@@ -1,4 +1,4 @@
-package org.ruivieira.plotlib;
+package org.ruivieira.plotlib.converters;
 
 
 import java.util.Collection;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Converter<T> {
+public class ListConverter<T> {
 
     public List<String> getConverted() {
         return converted;
@@ -15,7 +15,7 @@ public class Converter<T> {
     private final List<String> converted;
 
 
-    public Converter(Collection<T> data) {
+    public ListConverter(Collection<T> data) {
         this.converted = data.stream().map(Objects::toString).collect(Collectors.toList());
     }
 
