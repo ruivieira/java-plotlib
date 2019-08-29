@@ -6,7 +6,7 @@
 
     <groupId>org.ruivieira</groupId>
     <artifactId>java-plotlib</artifactId>
-    <version>0.0.12</version>
+    <version>0.0.12-SNAPSHOT</version>
 
     <build>
         <plugins>
@@ -103,7 +103,7 @@
         <repository>
             <id>github</id>
             <name>GitHub ruivieira Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/ruivieira/java-plotlib</url>
+            <url>https://maven.pkg.github.com/ruivieira/maven</url>
         </repository>
     </distributionManagement>
 
