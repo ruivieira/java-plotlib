@@ -3,6 +3,7 @@ package org.ruivieira.plotlib.plots;
 import org.ruivieira.plotlib.BinaryAbstractPlot;
 import org.ruivieira.plotlib.Arguments;
 import org.ruivieira.plotlib.Plot;
+import org.ruivieira.plotlib.Variable;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -28,13 +29,16 @@ public class InterpolationPlot<T, U> extends BinaryAbstractPlot<T, U> implements
         script.append("from scipy.interpolate import interp1d\n");
         script.append("import numpy as np\n");
 
-        script.append(String.format("_z = interp1d(%s, %s, %s)\n",
+        final String zName = Variable.getTemporary("z");
+        script.append(String.format("%s = interp1d(%s, %s, %s)\n",
+                zName,
                 xs.getConvertedList(),
                 ys.getConvertedList(),
                 Arguments.build("kind", "cubic")));
 
-        script.append("_x = np.linspace(").append(xs.getConverted().get(0)).append(", ").append(xs.getConverted().get(xs.getConverted().size()-1)).append(", num=").append(this.steps).append(", endpoint=True)\n");
-        script.append("plt.plot(_x, _z(_x)");
+        final String xName = Variable.getTemporary("x");
+        script.append(String.format("%s = np.linspace(", xName)).append(xs.getConverted().get(0)).append(", ").append(xs.getConverted().get(xs.getConverted().size()-1)).append(", num=").append(this.steps).append(", endpoint=True)\n");
+        script.append(String.format("plt.plot(%s, %s(%s)", xName, zName, xName));
 
         renderColour();
         renderAlpha();

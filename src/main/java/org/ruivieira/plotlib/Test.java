@@ -4,8 +4,8 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.pmw.tinylog.Configurator;
 import org.pmw.tinylog.Level;
 import org.pmw.tinylog.writers.ConsoleWriter;
-import org.ruivieira.plotlib.plots.Histogram;
 import org.ruivieira.plotlib.plots.HorizontalLine;
+import org.ruivieira.plotlib.plots.InterpolationPlot;
 import org.ruivieira.plotlib.plots.MatShow;
 import org.ruivieira.plotlib.plots.ScatterPlot;
 
@@ -16,6 +16,15 @@ import static org.apache.commons.math3.linear.MatrixUtils.createRealIdentityMatr
 
 
 public class Test {
+
+    public static void interpolationPlot() {
+        Double[] x = new Double[]{0.0, 1.0, 2.0, 3.0};
+        Double[] y = new Double[]{1.0, 5.0, 2.5, 6.0};
+
+        Figure figure = new Figure();
+        figure.add(new InterpolationPlot<>(Arrays.asList(x), Arrays.asList(y), 20));
+        figure.show();
+    }
 
     public static void main(String[] args) throws IOException {
 
@@ -39,5 +48,8 @@ public class Test {
         Figure f = new Figure();
         f.add(new MatShow(m));
         f.show();
+
+        // Interpolation plot
+        Test.interpolationPlot();
     }
 }

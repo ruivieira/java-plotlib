@@ -6,7 +6,7 @@
 
     <groupId>org.ruivieira</groupId>
     <artifactId>java-plotlib</artifactId>
-    <version>0.0.12-SNAPSHOT</version>
+    <version>0.0.13-SNAPSHOT</version>
 
     <build>
         <plugins>
@@ -64,40 +64,6 @@
             <version>${commons.math.version}</version>
         </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <repositories>
-                <repository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>bintray-ruivieira-maven</id>
-                    <name>bintray</name>
-                    <url>https://dl.bintray.com/ruivieira/maven</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>bintray-ruivieira-maven</id>
-                    <name>bintray-plugins</name>
-                    <url>https://dl.bintray.com/ruivieira/maven</url>
-                </pluginRepository>
-            </pluginRepositories>
-            <id>bintray</id>
-        </profile>
-    </profiles>
-
-<!--    <distributionManagement>-->
-<!--        <repository>-->
-<!--            <id>bintray-ruivieira-maven</id>-->
-<!--            <name>ruivieira-maven</name>-->
-<!--            <url>https://api.bintray.com/maven/ruivieira/maven/java-plotlib/;publish=1</url>-->
-<!--        </repository>-->
-<!--    </distributionManagement>-->
 
     <distributionManagement>
         <repository>

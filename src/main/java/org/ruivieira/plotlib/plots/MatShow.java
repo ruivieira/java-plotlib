@@ -1,6 +1,5 @@
 package org.ruivieira.plotlib.plots;
 
-import org.apache.commons.math3.linear.AbstractRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.ruivieira.plotlib.MatrixAbstractPlot;
 
